@@ -5,6 +5,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+pnpm-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -99,6 +100,9 @@ dist
 # Sveltekit cache directory
 .svelte-kit/
 
+# Astro generated files
+.astro/
+
 # vitepress build output
 **/.vitepress/dist
 
@@ -125,6 +129,12 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# macOS-specific files
+.DS_Store
+
+# JetBrains settings
+.idea/
 
 # pnpm
 .pnpm-store
