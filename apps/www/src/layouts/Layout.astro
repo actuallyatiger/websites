@@ -1,23 +1,44 @@
+---
+import "../styles/globals.css";
+import Navigation from "../components/Navigation.astro";
+import ScrollToTop from "../components/ScrollToTop.astro";
+import icon from "../assets/icon.svg";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = "Tiger Taylor", description = "Portfolio of Tiger Taylor" } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-gray-50 flex flex-col" style="font-family: Inter, sans-serif;">
+    <header class="bg-white shadow-md py-4 px-6">
+      <Navigation logoSrc={icon.src} />
+    </header>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <slot />
+
+    <footer class="border-t border-gray-200 py-6 px-6">
+      <div class="max-w-6xl mx-auto text-center">
+        <p class="text-gray-600">&copy; {new Date().getFullYear()} Tiger Taylor</p>
+      </div>
+    </footer>
+
+    <ScrollToTop />
+  </body>
+</html>

@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+:root {
+  --color-black: #1b1b1b;
+  --color-white: #ffffff;
+  --color-blue-50: #f0f3ff;
+  --color-blue-100: #e0e7ff;
+  --color-blue-200: #c7d1ff;
+  --color-blue-300: #a6b8ff;
+  --color-blue-400: #869eff;
+  --color-blue-500: #6080ff;
+  --color-blue-600: #4b6adf;
+  --color-blue-700: #3a55c8;
+  --color-blue-800: #2d45a4;
+  --color-blue-900: #233a85;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0.3;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.menu-item-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.menu-item-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-75 {
+  transition-delay: 75ms;
+}
+
+.delay-150 {
+  transition-delay: 150ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}

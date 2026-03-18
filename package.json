@@ -2,7 +2,6 @@
   "name": "websites",
   "version": "1.0.0",
   "description": "Collection of my websites which are on *.tigertaylor.xyz",
-  "main": "index.js",
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build"

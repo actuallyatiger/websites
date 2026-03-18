@@ -1,0 +1,125 @@
+---
+import { modules } from '../data/courseModules';
+
+const initialCount = 4;
+const initialModules = modules.slice(0, initialCount);
+const extraModules = modules.slice(initialCount);
+---
+
+<div id="course-highlights" class="mb-8">
+  <h3 class="text-xl font-bold mb-4 text-blue-800 pb-2 border-b border-blue-100">Course Module Highlights</h3>
+  <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 mb-2">
+    {
+      initialModules.map((module) => (
+        <li class="flex items-start">
+          <div class="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+            <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+          </div>
+          <div>
+            <span class="font-medium text-gray-900">{module.title}</span>
+            <p class="text-sm text-gray-600">{module.description}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    extraModules.length > 0 && (
+      <>
+        <div
+          id="course-highlights-extra"
+          class="grid transition-[max-height,opacity,margin] duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-0"
+          aria-hidden="true"
+        >
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 mt-2">
+            {
+              extraModules.map((module) => (
+                <li class="flex items-start">
+                  <div class="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+                    <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+                  </div>
+                  <div>
+                    <span class="font-medium text-gray-900">{module.title}</span>
+                    <p class="text-sm text-gray-600">{module.description}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="flex justify-center mt-2">
+          <button
+            id="course-highlights-toggle"
+            type="button"
+            class="flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-blue-50"
+            aria-expanded="false"
+            aria-controls="course-highlights-extra"
+          >
+            <span id="course-highlights-label">Show More</span>
+            <span id="course-highlights-chevron-down" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+            <span id="course-highlights-chevron-up" class="hidden" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </>
+    )
+  }
+</div>
+
+<script>
+  const toggle = document.getElementById("course-highlights-toggle");
+  const panel = document.getElementById("course-highlights-extra");
+  const label = document.getElementById("course-highlights-label");
+  const down = document.getElementById("course-highlights-chevron-down");
+  const up = document.getElementById("course-highlights-chevron-up");
+
+  if (toggle && panel) {
+    let expanded = false;
+
+    const applyState = () => {
+      if (!(panel instanceof HTMLElement) || !(toggle instanceof HTMLElement)) {
+        return;
+      }
+
+      panel.classList.toggle("opacity-100", expanded);
+      panel.classList.toggle("opacity-0", !expanded);
+      panel.classList.toggle("mt-2", expanded);
+      panel.classList.toggle("mt-0", !expanded);
+      panel.setAttribute("aria-hidden", expanded ? "false" : "true");
+      panel.style.maxHeight = expanded ? `${panel.scrollHeight}px` : "0px";
+
+      toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+
+      if (label) {
+        label.textContent = expanded ? "Show Less" : "Show More";
+      }
+
+      if (down && up) {
+        down.classList.toggle("hidden", expanded);
+        up.classList.toggle("hidden", !expanded);
+      }
+    };
+
+    toggle.addEventListener("click", () => {
+      expanded = !expanded;
+      applyState();
+    });
+
+    window.addEventListener("resize", () => {
+      if (expanded && panel instanceof HTMLElement) {
+        panel.style.maxHeight = `${panel.scrollHeight}px`;
+      }
+    });
+
+    applyState();
+  }
+</script>

@@ -1,0 +1,30 @@
+---
+import type { TileSet } from "../lib/declarations";
+import Icon from "./Icon";
+
+interface Props {
+  tileset: TileSet;
+}
+
+const { tileset } = Astro.props;
+const { title, tiles } = tileset;
+---
+
+<div class="flex flex-col items-center gap-3 max-w-[80%]">
+  <h3 class="font-semibold text-3xl text-white">{title}</h3>
+  <div class="flex flex-wrap justify-center gap-4">
+    {
+      tiles.map((tile) => (
+        <a
+          href={tile.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={tile.name}
+          class="size-fit p-2 rounded-lg bg-white/20 hover:bg-white/30 border-2 border-white/30 hover:border-white/50 text-white fill-white transition-all duration-200 hover:cursor-pointer"
+        >
+          <Icon name={tile.iconName} className="h-12 w-12 sm:h-14 sm:w-14 text-white" />
+        </a>
+      ))
+    }
+  </div>
+</div>

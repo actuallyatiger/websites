@@ -5,7 +5,6 @@ This is a monorepo for all of my websites which are on \*.tigertaylor.xyz. It is
 ## Structure
 
 - `apps/`: This directory contains all of the applications (websites) that I have. Each application is in its own subdirectory.
-- `packages/`: This directory contains any shared packages or libraries that are used across multiple applications
 
 ## Licenses
 
